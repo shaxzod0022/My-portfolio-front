@@ -1,0 +1,14 @@
+{
+  "navbar": {
+    "logo": "Go To Samarkand",
+    "navLinks": [
+      { "path": "", "label": "Home" },
+      { "path": "about", "label": "About Us" },
+      { "path": "tours", "label": "Tours" },
+      { "path": "gallery", "label": "Gallery" },
+      { "path": "services", "label": "Services" },
+      { "path": "events", "label": "Events" },
+      { "path": "contacts", "label": "Contacts" }
+    ]
+  }
+}

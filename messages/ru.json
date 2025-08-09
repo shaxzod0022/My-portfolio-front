@@ -1,0 +1,14 @@
+{
+  "navbar": {
+    "logo": "В Самарканд",
+    "navLinks": [
+      { "path": "", "label": "Главная" },
+      { "path": "about", "label": "О нас" },
+      { "path": "tours", "label": "Туры" },
+      { "path": "gallery", "label": "Галерея" },
+      { "path": "services", "label": "Услуги" },
+      { "path": "events", "label": "Мероприятия" },
+      { "path": "contacts", "label": "Контакты" }
+    ]
+  }
+}

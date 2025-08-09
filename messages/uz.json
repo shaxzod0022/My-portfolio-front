@@ -1,0 +1,10 @@
+{
+  "navbar": {
+    "logo": "Shaxzod Ilgeldiyev",
+    "navLinks": [
+      { "path": "about", "label": "Men haqimda" },
+      { "path": "skills", "label": "Ko‘nikmalar" },
+      { "path": "portfolio", "label": "Portfolio" }
+    ]
+  }
+}
