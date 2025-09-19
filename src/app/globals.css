@@ -1,1 +1,80 @@
 @import "tailwindcss";
+
+button {
+  cursor: pointer;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: Quicksand;
+}
+
+.scroll_hidden {
+  overflow-x: hidden;
+}
+
+.btn_loader {
+  width: 25px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background: linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.5) 30%,
+        #0000 0 70%,
+        rgb(255, 255, 255) 0
+      )
+      50%/8% 100%,
+    linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.25) 30%,
+        #0000 0 70%,
+        rgba(255, 255, 255, 0.75) 0
+      )
+      50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+}
+.btn_loader::before,
+.btn_loader::after {
+  content: "";
+  grid-area: 1/1;
+  border-radius: 50%;
+  background: inherit;
+  opacity: 0.915;
+  transform: rotate(30deg);
+}
+.btn_loader::after {
+  opacity: 0.83;
+  transform: rotate(60deg);
+}
+@keyframes l23 {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+/* HTML: <div class="loader"></div> */
+.page_loader {
+  width: fit-content;
+  font-weight: bold;
+  font-family: monospace;
+  font-size: 30px;
+  background: linear-gradient(90deg, #000 50%, #0000 0) right/200% 100%;
+  animation: l21 2s infinite linear;
+}
+.page_loader::before {
+  content: "Loading...";
+  color: #0000;
+  padding: 0 5px;
+  background: inherit;
+  background-image: linear-gradient(90deg, #fff 50%, #000 0);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+@keyframes l21 {
+  100% {
+    background-position: left;
+  }
+}

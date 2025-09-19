@@ -7,9 +7,10 @@ export const styles = {
   flexCenter: "flex justify-center items-center flex-wrap",
   flexEnd: "flex justify-end items-center flex-wrap",
   paddingCont: "p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 2xl:p-16",
-  h1: "text-3xl md:text-5xl font-bold",
-  h2: "text-2xl md:text-3xl font-semibold",
+  h1: "text-3xl lg:text-5xl font-bold",
+  h2: "text-2xl lg:text-3xl font-semibold",
   h3: "text-xl font-medium",
   h4: "text-lg font-medium",
-  p: "text-base leading-relaxed",
+  p: "text-base leading-relaxed text-lg",
+  span: "text-base leading-relaxed",
 };

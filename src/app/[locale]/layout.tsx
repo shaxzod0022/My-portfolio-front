@@ -3,6 +3,7 @@ import "../globals.css";
 import { NextIntlClientProvider } from "next-intl";
 import { Footer, Navbar } from "@/components";
 import { getMessages } from "next-intl/server";
+import { ThemeProvider } from "next-themes";
 
 export const metadata: Metadata = {
   title: "Shakhzod Ilgeldiyev - Web Developer",
@@ -21,15 +22,12 @@ export default async function LocaleLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} suppressHydrationWarning className="hydrate">
-      <body className="antialiased mx-auto w-full max-w-[1800px]">
-        <NextIntlClientProvider locale={locale} messages={messages}>
-          <Navbar />
-          {children}
-          <Footer />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+      <NextIntlClientProvider locale={locale} messages={messages}>
+        <Navbar />
+        {children}
+        <Footer />
+      </NextIntlClientProvider>
+    </ThemeProvider>
   );
 }
-

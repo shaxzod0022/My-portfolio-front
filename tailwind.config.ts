@@ -1,8 +1,10 @@
 // tailwind.config.js
 export default {
+  darkMode: "class",
   content: [
     "./index.html",
-    "./app/**/*.{js,ts,jsx,tsx}", // Next.js yoki React uchun
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}", // qo‘shimcha
   ],
   theme: {
     extend: {

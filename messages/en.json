@@ -1,14 +1,11 @@
 {
   "navbar": {
-    "logo": "Go To Samarkand",
+    "logo": "Shaxzod Ilgeldiyev",
     "navLinks": [
-      { "path": "", "label": "Home" },
-      { "path": "about", "label": "About Us" },
-      { "path": "tours", "label": "Tours" },
-      { "path": "gallery", "label": "Gallery" },
-      { "path": "services", "label": "Services" },
-      { "path": "events", "label": "Events" },
-      { "path": "contacts", "label": "Contacts" }
-    ]
+      { "path": "about", "label": "Men haqimda" },
+      { "path": "skills", "label": "Ko‘nikmalar" },
+      { "path": "portfolio", "label": "Portfolio" }
+    ],
+    "btn": "Menga yozing"
   }
 }
