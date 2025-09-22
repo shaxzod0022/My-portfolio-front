@@ -178,6 +178,7 @@ const UpdateSocialLink = ({
       <div className={`${styles.flex} gap-3`}>
         <Btn disabled={loading} title="Update" />
         <Btn
+          type="button"
           title="Cancel"
           newClass="bg-red-500 hover:bg-red-400 active:bg-red-300"
           onClick={show}
