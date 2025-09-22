@@ -4,17 +4,23 @@ import { handleError } from "@/lib/handleError";
 import { LinkService } from "@/services/link.service";
 import { styles } from "@/styles/styles";
 import React, { useState } from "react";
-import BackMessage from "../helper/BackMessage";
-import { CreateLink } from "@/interfaces/link.interface";
+import { CreateLink, SocialLink } from "@/interfaces/link.interface";
 
 interface Props {
   hidden: boolean;
   show?: () => void;
+  onSuccess: (newLink: SocialLink) => void;
+  errMess?: (message: string | null) => void;
+  sucMess?: (message: string | null) => void;
 }
 
-const AddSocialLink = ({ hidden, show }: Props) => {
-  const [error, setError] = useState<string | null>(null);
-  const [success, setSuccess] = useState<string | null>(null);
+const AddSocialLink = ({
+  hidden,
+  show,
+  onSuccess,
+  errMess,
+  sucMess,
+}: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [form, setForm] = useState<CreateLink>({
     translations: {
@@ -29,19 +35,37 @@ const AddSocialLink = ({ hidden, show }: Props) => {
     e.preventDefault();
     setLoading(true);
     const token = sessionStorage.getItem("token") || "";
+
     try {
       const response = await LinkService.createLink(form, token);
+
       if (response) {
-        setSuccess("Link added successfully.");
-        setInterval(() => {
-          setSuccess(null);
-          if (show) show();
-        }, 4000);
+        // muvaffaqiyatli qo‘shildi
+        sucMess?.("Link added successfully.");
+        onSuccess(response);
+
+        // forma tozalanadi
+        setForm({
+          translations: {
+            uz: { linkName: "" },
+            ru: { linkName: "" },
+            en: { linkName: "" },
+          },
+          linkPathname: "",
+        });
+
+        // modalni yopamiz
+        show?.();
+
+        // xabarni 3 soniyada yo‘qotamiz
+        setTimeout(() => sucMess?.(null), 3000);
       }
     } catch (err) {
       const errorMessage = handleError(err);
-      setError(errorMessage);
-      setInterval(() => setError(null), 3000);
+      errMess?.(errorMessage);
+
+      // xabarni 3 soniyada yo‘qotamiz
+      setTimeout(() => errMess?.(null), 3000);
     } finally {
       setLoading(false);
     }
@@ -147,7 +171,6 @@ const AddSocialLink = ({ hidden, show }: Props) => {
           />
         </div>
       </form>
-      <BackMessage successMessage={success} errorMessage={error} />
     </>
   );
 };

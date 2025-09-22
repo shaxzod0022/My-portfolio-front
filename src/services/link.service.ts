@@ -1,7 +1,17 @@
-import { CreateLink, SocialLink } from "@/interfaces/link.interface";
+import {
+  CreateLink,
+  GetAllLangLink,
+  SocialLink,
+} from "@/interfaces/link.interface";
 import axios from "axios";
 
 export const LinkService = {
+  async getAllLang(id: string) {
+    const { data } = await axios.get<GetAllLangLink>(
+      `http://localhost:8000/api/links/${id}`
+    );
+    return data;
+  },
   async getAllLinks(lang: string) {
     const { data } = await axios.get<SocialLink[]>(
       `http://localhost:8000/api/links?lang=${lang}`
@@ -20,6 +30,16 @@ export const LinkService = {
       `http://localhost:8000/api/links`,
       form,
       { headers: { Authorization: `Bearer ${token}` } }
+    );
+    return data;
+  },
+  async updateLink(form: CreateLink, token: string, id: string) {
+    const { data } = await axios.put(
+      `http://localhost:8000/api/links/${id}`,
+      form,
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
     );
     return data;
   },

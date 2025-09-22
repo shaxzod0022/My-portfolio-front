@@ -40,7 +40,7 @@ const Navbar = ({ onToggleSidebar }: Props) => {
   };
 
   return (
-    <div className={`${styles.flexBetween} bg-white p-5`}>
+    <div className={`${styles.flexBetween} sticky top-0 w-full bg-white p-5`}>
       <button
         onClick={onToggleSidebar}
         className={`cursor-pointer p-2 rounded-xl hover:bg-gray-100 transition`}

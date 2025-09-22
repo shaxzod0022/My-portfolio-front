@@ -12,6 +12,8 @@ const BackMessage = ({ errorMessage, successMessage }: Props) => {
   const message = errorMessage || successMessage;
   const isError = Boolean(errorMessage);
 
+  const messageStyle = (message: string) => {};
+
   return (
     <AnimatePresence>
       {message && (
@@ -27,7 +29,7 @@ const BackMessage = ({ errorMessage, successMessage }: Props) => {
           <span className="mr-2">
             {isError ? <CircleX /> : <CircleCheck />}
           </span>
-          <span>{message}</span>
+          <span className="">{message}</span>
         </motion.div>
       )}
     </AnimatePresence>

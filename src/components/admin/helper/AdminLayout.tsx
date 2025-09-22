@@ -15,12 +15,12 @@ export default function RootLayout({
 
   return (
     <ProtectedRoute>
-      <div className="flex min-h-screen bg-slate-200">
+      <div className="flex min-h-screen">
         {!isLoginPage && (
           <SideBar onToggleSidebar={() => setClose((i) => !i)} hidden={close} />
         )}
         <main
-          className={`${
+          className={`bg-slate-200 ${
             isLoginPage
               ? "scroll_hidden"
               : `right-0 absolute transition-all ${
