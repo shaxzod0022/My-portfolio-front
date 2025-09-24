@@ -1,5 +1,5 @@
 "use client";
-import { AboutHead, SocialLinks } from "@/components";
+import { AboutHead, Skills, SocialLinks } from "@/components";
 import { LinkService } from "@/services/link.service";
 import { styles } from "@/styles/styles";
 import { useAuth } from "@/utils/auth";
@@ -27,6 +27,7 @@ const About = () => {
   return (
     <div className="space-y-2">
       <AboutHead />
+      <Skills />
       <SocialLinks />
     </div>
   );

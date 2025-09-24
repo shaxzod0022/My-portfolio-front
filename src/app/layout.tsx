@@ -1,6 +1,8 @@
 import React from "react";
 import "flag-icons/css/flag-icons.min.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Quicksand } from "next/font/google";
+import Providers from "@/components/helper/Provider";
 
 const quicksand = Quicksand({
   subsets: ["latin"],
@@ -14,7 +16,9 @@ const RootLayout = ({
 }>) => {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={quicksand.className}>{children}</body>
+      <body className={quicksand.className}>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 };

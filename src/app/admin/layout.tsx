@@ -1,6 +1,7 @@
 import { AdminLayout } from "@/components";
 import "../globals.css";
 import "flag-icons/css/flag-icons.min.css";
+import "boxicons/css/boxicons.min.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

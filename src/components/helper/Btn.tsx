@@ -18,7 +18,7 @@ const Btn: FC<Btn> = ({ title, onClick, disabled, newClass, type }) => {
       className={`${newClass} cursor-pointer font-semibold ${
         disabled
           ? "bg-blue-800 !cursor-no-drop"
-          : "bg-blue-950 hover:bg-blue-900 active:bg-blue-800"
+          : "bg-blue-950 hover:bg-blue-900 active:bg-blue-950"
       } text-white ${styles.flexCenter} rounded-lg sm:py-2 py-1 sm:px-7 px-4`}
     >
       {disabled ? <span className="btn_loader"></span> : title}

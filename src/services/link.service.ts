@@ -33,9 +33,9 @@ export const LinkService = {
     );
     return data;
   },
-  async updateLink(form: CreateLink, token: string, id: string) {
+  async updateLink(form: CreateLink, token: string, id: string, lang: string) {
     const { data } = await axios.put(
-      `http://localhost:8000/api/links/${id}`,
+      `http://localhost:8000/api/links/${id}?lang=${lang}`,
       form,
       {
         headers: { Authorization: `Bearer ${token}` },

@@ -3,6 +3,7 @@ import { styles } from "@/styles/styles";
 import { AlignLeft, ChevronDown, LogOut, Shield, User } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { getCurrentUsername, getCurrentUserRole, logout } from "@/utils/auth";
+import AdminLanguageScitcher from "./AdminLanguageSwitcher";
 
 interface Props {
   onToggleSidebar: () => void;
@@ -47,60 +48,63 @@ const Navbar = ({ onToggleSidebar }: Props) => {
       >
         <AlignLeft />
       </button>
-      <div className="relative" ref={dropdownRef}>
-        <button
-          onClick={() => setShowUserMenu(!showUserMenu)}
-          className={`${styles.flex} items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition-colors`}
-        >
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-blue-950 flex items-center justify-center">
-              {userRole === "super_admin" ? (
-                <Shield className="w-4 h-4 text-white" />
-              ) : (
-                <User className="w-4 h-4 text-white" />
-              )}
-            </div>
-            <div className="text-left">
-              <div className="text-sm font-medium text-gray-900">
-                {username || "Admin"}
+      <div className={`${styles.flex} gap-2`}>
+        <AdminLanguageScitcher />
+        <div className="relative" ref={dropdownRef}>
+          <button
+            onClick={() => setShowUserMenu(!showUserMenu)}
+            className={`${styles.flex} items-center gap-3 p-2 rounded-lg hover:bg-gray-100 transition-colors`}
+          >
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-blue-950 flex items-center justify-center">
+                {userRole === "super_admin" ? (
+                  <Shield className="w-4 h-4 text-white" />
+                ) : (
+                  <User className="w-4 h-4 text-white" />
+                )}
               </div>
-              <div className="text-xs text-gray-500">User</div>
-            </div>
-          </div>
-          <ChevronDown
-            className={`w-4 h-4 text-gray-500 transition-transform ${
-              showUserMenu ? "rotate-180" : ""
-            }`}
-          />
-        </button>
-
-        {/* Dropdown Menu */}
-        {showUserMenu && (
-          <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
-            <div className="px-4 py-2 border-b border-gray-100">
-              <div className="text-sm font-medium text-gray-900">
-                {username || "Admin"}
+              <div className="text-left">
+                <div className="text-sm font-medium text-gray-900">
+                  {username || "Admin"}
+                </div>
+                <div className="text-xs text-gray-500">User</div>
               </div>
-              <div className="text-xs text-gray-500">by</div>
             </div>
+            <ChevronDown
+              className={`w-4 h-4 text-gray-500 transition-transform ${
+                showUserMenu ? "rotate-180" : ""
+              }`}
+            />
+          </button>
 
-            <div className="px-4 py-2">
-              <span
-                className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full`}
+          {/* Dropdown Menu */}
+          {showUserMenu && (
+            <div className="absolute right-0 top-full mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50">
+              <div className="px-4 py-2 border-b border-gray-100">
+                <div className="text-sm font-medium text-gray-900">
+                  {username || "Admin"}
+                </div>
+                <div className="text-xs text-gray-500">by</div>
+              </div>
+
+              <div className="px-4 py-2">
+                <span
+                  className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full`}
+                >
+                  Active
+                </span>
+              </div>
+
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
               >
-                Active
-              </span>
+                <LogOut className="w-4 h-4" />
+                Logout
+              </button>
             </div>
-
-            <button
-              onClick={handleLogout}
-              className="w-full flex items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
-            >
-              <LogOut className="w-4 h-4" />
-              Logout
-            </button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

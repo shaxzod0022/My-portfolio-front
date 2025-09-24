@@ -17,5 +17,8 @@ export { default as ProtectedRoute } from "./admin/helper/ProtectedRoute";
 export { default as SideBar } from "./admin/helper/SideBar";
 export { default as AdminLayout } from "./admin/helper/AdminLayout";
 export { default as NavbarAdmin } from "./admin/helper/Navbar";
+
+// admin about components
 export { default as SocialLinks } from "./admin/about/SocialLinks";
 export { default as AboutHead } from "./admin/about/AboutHead";
+export { default as Skills } from "./admin/about/Skills";

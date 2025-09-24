@@ -1,23 +1,23 @@
 "use client";
 import Btn from "@/components/helper/Btn";
+import { CreateSkills, Skills } from "@/interfaces/skill.interface";
 import { handleError } from "@/lib/handleError";
-import { LinkService } from "@/services/link.service";
+import { SkillService } from "@/services/skill.service";
+import { RootState } from "@/store/store";
 import { styles } from "@/styles/styles";
 import React, { useEffect, useState } from "react";
-import { CreateLink, SocialLink } from "@/interfaces/link.interface";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
 
 interface Props {
   hidden: boolean;
   show?: () => void;
-  onSuccess: (newLink: SocialLink) => void;
+  onSuccess: (newLink: Skills) => void;
   id: string | null;
   errMess?: (message: string | null) => void;
   sucMess?: (message: string | null) => void;
 }
 
-const UpdateSocialLink = ({
+const UpdateSkills = ({
   hidden,
   show,
   onSuccess,
@@ -26,29 +26,30 @@ const UpdateSocialLink = ({
   errMess,
 }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [form, setForm] = useState<CreateLink>({
+  const [form, setForm] = useState<CreateSkills>({
     translations: {
-      uz: { linkName: "" },
-      ru: { linkName: "" },
-      en: { linkName: "" },
+      uz: { skillName: "" },
+      ru: { skillName: "" },
+      en: { skillName: "" },
     },
-    linkPathname: "",
+    skillIcon: "",
   });
+
   const lang = useSelector((state: RootState) => state.language.lang);
 
   useEffect(() => {
     const fetchData = async () => {
       if (!id) return null;
       try {
-        const response = await LinkService.getAllLang(id);
+        const response = await SkillService.getAllLang(id);
         if (response) {
           setForm({
             translations: {
-              uz: { linkName: response.translations.uz.linkName || "" },
-              ru: { linkName: response.translations.ru.linkName || "" },
-              en: { linkName: response.translations.en.linkName || "" },
+              uz: { skillName: response.translations.uz.skillName || "" },
+              ru: { skillName: response.translations.ru.skillName || "" },
+              en: { skillName: response.translations.en.skillName || "" },
             },
-            linkPathname: response.linkPathname || "",
+            skillIcon: response.skillIcon || "",
           });
         }
       } catch (err) {
@@ -66,17 +67,17 @@ const UpdateSocialLink = ({
     const token = sessionStorage.getItem("token") || "";
     if (!id) return null;
     try {
-      const response = await LinkService.updateLink(form, token, id, lang);
+      const response = await SkillService.updateSkill(form, token, id, lang);
       if (response) {
-        sucMess?.("Link updated successfully.");
+        sucMess?.("Skill updated successfully.");
         onSuccess(response);
         setForm({
           translations: {
-            uz: { linkName: "" },
-            ru: { linkName: "" },
-            en: { linkName: "" },
+            uz: { skillName: "" },
+            ru: { skillName: "" },
+            en: { skillName: "" },
           },
-          linkPathname: "",
+          skillIcon: "",
         });
         show?.();
         setTimeout(() => sucMess?.(null), 3000);
@@ -104,85 +105,85 @@ const UpdateSocialLink = ({
       <h3 className={`${styles.h3} mb-2`}>Update a social media link</h3>
       <div className={`${styles.flexBetween} gap-3`}>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkName_uz">
-            Link name (UZ)
+          <label className="w-full" htmlFor="skillName_uz">
+            Skill name (UZ)
           </label>
           <input
             type="text"
-            id="linkName_uz"
+            id="skillName_uz"
             required
-            value={form.translations.uz.linkName}
+            value={form.translations.uz.skillName}
             onChange={(e) =>
               setForm({
                 ...form,
                 translations: {
                   ...form.translations,
-                  uz: { linkName: e.target.value },
+                  uz: { skillName: e.target.value },
                 },
               })
             }
             className="outline-none border border-blue-900 rounded w-full p-2 mb-3"
-            placeholder="Github"
+            placeholder="React"
           />
         </div>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkName_ru">
-            Link name (RU)
+          <label className="w-full" htmlFor="skillName_ru">
+            Skill name (RU)
           </label>
           <input
             type="text"
-            value={form.translations.ru.linkName}
-            id="linkName_ru"
+            value={form.translations.ru.skillName}
+            id="skillName_ru"
             required
             onChange={(e) =>
               setForm({
                 ...form,
                 translations: {
                   ...form.translations,
-                  ru: { linkName: e.target.value },
+                  ru: { skillName: e.target.value },
                 },
               })
             }
             className="outline-none border border-blue-900 rounded w-full p-2 mb-3"
-            placeholder="Гитхаб"
+            placeholder="React"
           />
         </div>
       </div>
       <div className={`${styles.flexBetween} gap-3 mb-5`}>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkName_en">
-            Link name (EN)
+          <label className="w-full" htmlFor="skillName_en">
+            Skill name (EN)
           </label>
           <input
-            value={form.translations.en.linkName}
+            value={form.translations.en.skillName}
             type="text"
-            id="linkName_en"
+            id="skillName_en"
             required
             onChange={(e) =>
               setForm({
                 ...form,
                 translations: {
                   ...form.translations,
-                  en: { linkName: e.target.value },
+                  en: { skillName: e.target.value },
                 },
               })
             }
             className="outline-none border border-blue-900 rounded w-full p-2"
-            placeholder="Github"
+            placeholder="React"
           />
         </div>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkPathname">
+          <label className="w-full" htmlFor="skillIcon">
             Link pathname
           </label>
           <input
             type="text"
-            value={form.linkPathname}
-            id="linkPathname"
+            value={form.skillIcon}
+            id="skillIcon"
             required
-            onChange={(e) => setForm({ ...form, linkPathname: e.target.value })}
+            onChange={(e) => setForm({ ...form, skillIcon: e.target.value })}
             className="outline-none border border-blue-900 rounded w-full p-2"
-            placeholder="https://github.com/username"
+            placeholder="fa-brands fa-react"
           />
         </div>
       </div>
@@ -195,11 +196,11 @@ const UpdateSocialLink = ({
           onClick={() => {
             setForm({
               translations: {
-                uz: { linkName: "" },
-                ru: { linkName: "" },
-                en: { linkName: "" },
+                uz: { skillName: "" },
+                ru: { skillName: "" },
+                en: { skillName: "" },
               },
-              linkPathname: "",
+              skillIcon: "",
             });
             show?.();
           }}
@@ -209,4 +210,4 @@ const UpdateSocialLink = ({
   );
 };
 
-export default UpdateSocialLink;
+export default UpdateSkills;

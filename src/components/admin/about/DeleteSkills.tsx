@@ -1,21 +1,21 @@
 "use client";
 import Btn from "@/components/helper/Btn";
+import { Skills } from "@/interfaces/skill.interface";
 import { handleError } from "@/lib/handleError";
-import { LinkService } from "@/services/link.service";
+import { SkillService } from "@/services/skill.service";
 import { styles } from "@/styles/styles";
 import React, { useState } from "react";
-import { SocialLink } from "@/interfaces/link.interface";
 
 interface Props {
   hidden: boolean;
   show?: () => void;
-  data?: SocialLink | null;
+  data?: Skills | null;
   onSuccess: (id: string) => void;
   errMess?: (message: string | null) => void;
   sucMess?: (message: string | null) => void;
 }
 
-const DeleteSocialLink = ({
+const DeleteSkills = ({
   hidden,
   show,
   data,
@@ -25,14 +25,14 @@ const DeleteSocialLink = ({
 }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
-  const deleteLink = async () => {
+  const deleteSkill = async () => {
     setLoading(true);
     if (!data) return null;
     const token = sessionStorage.getItem("token") || "";
     try {
-      const response = await LinkService.deleteLink(data?._id, token);
+      const response = await SkillService.deleteSkill(data?._id, token);
       if (response) {
-        sucMess?.("Link deleted successfully.");
+        sucMess?.("Skill deleted successfully.");
         onSuccess(data._id);
         show?.();
         setInterval(() => sucMess?.(null), 3000);
@@ -57,10 +57,10 @@ const DeleteSocialLink = ({
       >
         <h2 className={`${styles.h2} mb-5 text-center`}>
           Will you remove the{" "}
-          <span className="text-red-500">{data.linkName}</span> link?
+          <span className="text-red-500">{data.skillName}</span> link?
         </h2>
         <div className={`${styles.flexCenter} gap-3`}>
-          <Btn disabled={loading} title="Yes" onClick={deleteLink} />
+          <Btn disabled={loading} title="Yes" onClick={deleteSkill} />
           <Btn
             title="No"
             newClass="bg-red-500 hover:bg-red-400 active:bg-red-600"
@@ -72,4 +72,4 @@ const DeleteSocialLink = ({
   );
 };
 
-export default DeleteSocialLink;
+export default DeleteSkills;

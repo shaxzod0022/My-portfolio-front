@@ -79,7 +79,7 @@ const Sidebar: FC<Props> = ({ hidden, onToggleSidebar }) => {
                 }
                 className={`${styles.flex} ${styles.p} ${
                   pathname.includes(link.path) && "!bg-blue-950 !text-white"
-                } gap-2 py-3 px-8 transition w-full text-blue-950 hover:bg-blue-950/20`}
+                } gap-2 py-3 px-8 transition w-full text-blue-950 hover:bg-blue-950/20 font-semibold`}
               >
                 <Icon className="w-7 h-7" />
                 <span>{link.label}</span>

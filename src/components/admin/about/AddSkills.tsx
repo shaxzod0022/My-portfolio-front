@@ -1,34 +1,28 @@
 "use client";
 import Btn from "@/components/helper/Btn";
 import { handleError } from "@/lib/handleError";
-import { LinkService } from "@/services/link.service";
 import { styles } from "@/styles/styles";
 import React, { useState } from "react";
-import { CreateLink, SocialLink } from "@/interfaces/link.interface";
+import { CreateSkills, Skills } from "@/interfaces/skill.interface";
+import { SkillService } from "@/services/skill.service";
 
 interface Props {
   hidden: boolean;
   show?: () => void;
-  onSuccess: (newLink: SocialLink) => void;
+  onSuccess: (newLink: Skills) => void;
   errMess?: (message: string | null) => void;
   sucMess?: (message: string | null) => void;
 }
 
-const AddSocialLink = ({
-  hidden,
-  show,
-  onSuccess,
-  errMess,
-  sucMess,
-}: Props) => {
+const AddSkills = ({ hidden, show, onSuccess, errMess, sucMess }: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
-  const [form, setForm] = useState<CreateLink>({
+  const [form, setForm] = useState<CreateSkills>({
     translations: {
-      uz: { linkName: "" },
-      ru: { linkName: "" },
-      en: { linkName: "" },
+      uz: { skillName: "" },
+      ru: { skillName: "" },
+      en: { skillName: "" },
     },
-    linkPathname: "",
+    skillIcon: "",
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -37,22 +31,21 @@ const AddSocialLink = ({
     const token = sessionStorage.getItem("token") || "";
 
     try {
-      const response = await LinkService.createLink(form, token);
+      const response = await SkillService.createSkill(form, token);
 
       if (response) {
         // forma tozalanadi
         setForm({
           translations: {
-            uz: { linkName: "" },
-            ru: { linkName: "" },
-            en: { linkName: "" },
+            uz: { skillName: "" },
+            ru: { skillName: "" },
+            en: { skillName: "" },
           },
-          linkPathname: "",
+          skillIcon: "",
         });
         // muvaffaqiyatli qo‘shildi
-        sucMess?.("Link added successfully.");
+        sucMess?.("Skill added successfully.");
         onSuccess(response);
-
         // modalni yopamiz
         show?.();
 
@@ -77,88 +70,88 @@ const AddSocialLink = ({
         !hidden ? "hidden" : "block"
       } bg-white rounded-xl p-4 w-full sm:w-2/5 md:w-[40%] fixed top-1/2 left-1/2 -translate-1/2 z-50`}
     >
-      <h3 className={`${styles.h3} mb-2`}>Add a social media link</h3>
+      <h3 className={`${styles.h3} mb-2`}>Add skill</h3>
       <div className={`${styles.flexBetween} gap-3`}>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkName_uz">
-            Link name (UZ)
+          <label className="w-full" htmlFor="skillName_uz">
+            Skill name (UZ)
           </label>
           <input
             type="text"
-            value={form.translations.uz.linkName}
-            id="linkName_uz"
+            value={form.translations.uz.skillName}
+            id="skillName_uz"
             required
             onChange={(e) =>
               setForm({
                 ...form,
                 translations: {
                   ...form.translations,
-                  uz: { linkName: e.target.value },
+                  uz: { skillName: e.target.value },
                 },
               })
             }
             className="outline-none border border-blue-900 rounded w-full p-2 mb-3"
-            placeholder="Github"
+            placeholder="React"
           />
         </div>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkName_ru">
-            Link name (RU)
+          <label className="w-full" htmlFor="skillName_ru">
+            Skill name (RU)
           </label>
           <input
             type="text"
-            value={form.translations.ru.linkName}
-            id="linkName_ru"
+            value={form.translations.ru.skillName}
+            id="skillName_ru"
             required
             onChange={(e) =>
               setForm({
                 ...form,
                 translations: {
                   ...form.translations,
-                  ru: { linkName: e.target.value },
+                  ru: { skillName: e.target.value },
                 },
               })
             }
             className="outline-none border border-blue-900 rounded w-full p-2 mb-3"
-            placeholder="Гитхаб"
+            placeholder="React"
           />
         </div>
       </div>
       <div className={`${styles.flexBetween} gap-3 mb-5`}>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkName_en">
-            Link name (EN)
+          <label className="w-full" htmlFor="skillName_en">
+            Skill name (EN)
           </label>
           <input
             type="text"
-            value={form.translations.en.linkName}
-            id="linkName_en"
+            value={form.translations.en.skillName}
+            id="skillName_en"
             required
             onChange={(e) =>
               setForm({
                 ...form,
                 translations: {
                   ...form.translations,
-                  en: { linkName: e.target.value },
+                  en: { skillName: e.target.value },
                 },
               })
             }
             className="outline-none border border-blue-900 rounded w-full p-2"
-            placeholder="Github"
+            placeholder="React"
           />
         </div>
         <div className="lg:w-[47%] w-full">
-          <label className="w-full" htmlFor="linkPathname">
+          <label className="w-full" htmlFor="skillIcon">
             Link pathname
           </label>
           <input
             type="text"
-            id="linkPathname"
-            value={form.linkPathname}
+            id="skillIcon"
+            value={form.skillIcon}
             required
-            onChange={(e) => setForm({ ...form, linkPathname: e.target.value })}
+            onChange={(e) => setForm({ ...form, skillIcon: e.target.value })}
             className="outline-none border border-blue-900 rounded w-full p-2"
-            placeholder="https://github.com/username"
+            placeholder="fa-brands fa-react"
           />
         </div>
       </div>
@@ -175,4 +168,4 @@ const AddSocialLink = ({
   );
 };
 
-export default AddSocialLink;
+export default AddSkills;
