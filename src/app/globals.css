@@ -13,6 +13,15 @@ html {
   overflow-x: hidden;
 }
 
+.scroll-hidden {
+  scrollbar-width: none;
+}
+
+/* Chrome, Edge va Safari uchun */
+.scroll-hidden::-webkit-scrollbar {
+  display: none;
+}
+
 .btn_loader {
   width: 25px;
   aspect-ratio: 1;

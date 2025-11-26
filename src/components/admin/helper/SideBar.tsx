@@ -47,7 +47,7 @@ const Sidebar: FC<Props> = ({ hidden, onToggleSidebar }) => {
         hidden ? "md:-left-full left-0" : "md:left-0 -left-full"
       }`}
     >
-      <div className={`${styles.flex} gap-3 p-8`}>
+      <div className={`${styles.flex} justify-center flex-wrap gap-3 p-8`}>
         <Image
           className="w-12"
           src={Logo2}

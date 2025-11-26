@@ -63,7 +63,7 @@ const Navbar = ({ onToggleSidebar }: Props) => {
                   <User className="w-4 h-4 text-white" />
                 )}
               </div>
-              <div className="text-left">
+              <div className="text-left sm:inline-block hidden">
                 <div className="text-sm font-medium text-gray-900">
                   {username || "Admin"}
                 </div>
@@ -71,7 +71,7 @@ const Navbar = ({ onToggleSidebar }: Props) => {
               </div>
             </div>
             <ChevronDown
-              className={`w-4 h-4 text-gray-500 transition-transform ${
+              className={`w-4 h-4 sm:inline-block hidden text-gray-500 transition-transform ${
                 showUserMenu ? "rotate-180" : ""
               }`}
             />

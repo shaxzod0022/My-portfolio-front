@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useCallback, memo, useEffect, useRef } from "react";
 import { styles } from "@/styles/styles";
 import { ChevronsUpDown } from "lucide-react";
@@ -14,7 +13,13 @@ const languageOptions = [
   { value: "en", label: "English", icons: "us" },
 ];
 
-const AdminLanguageScitcher = memo(function AdminLanguageScitcher() {
+interface Props {
+  newClass?: string;
+}
+
+const AdminLanguageScitcher = memo(function AdminLanguageScitcher({
+  newClass,
+}: Props) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const modalRef = useRef<HTMLUListElement | null>(null);
   const dispatch = useDispatch();
@@ -55,7 +60,7 @@ const AdminLanguageScitcher = memo(function AdminLanguageScitcher() {
   }, [isOpen]);
 
   return (
-    <div className="relative inline-block">
+    <div className={`${newClass ? newClass : "inline-block"} relative `}>
       <button
         type="button"
         onClick={() => setIsOpen((i) => !i)}

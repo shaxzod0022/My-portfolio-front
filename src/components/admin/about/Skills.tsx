@@ -2,7 +2,6 @@
 import Btn from "@/components/helper/Btn";
 import { styles } from "@/styles/styles";
 import { Clock4, PencilLine, Trash2 } from "lucide-react";
-import Link from "next/link";
 import React, { useCallback, useEffect, useState } from "react";
 import { handleError } from "@/lib/handleError";
 import { formatToTashkent } from "@/lib/data";
@@ -14,6 +13,10 @@ import DeleteSkills from "./DeleteSkills";
 import UpdateSkills from "./UpdateSkills";
 import { Skills } from "@/interfaces/skill.interface";
 import { SkillService } from "@/services/skill.service";
+
+interface Props {
+  skillData: Skills[];
+}
 
 const SkillsComponent = () => {
   const [hidden, setHidden] = useState<boolean>(false);
